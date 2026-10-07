@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { needs, type Product } from "@/lib/products";
 import { ProductCard } from "./ProductCard";
 
-export function ProductGrid({ title, intro, items, initialNeed }: { title: string; intro: string; items: Product[]; initialNeed?: string }) {
+export function ProductGrid({ title, intro, items, initialNeed }: { title: string; intro: string; items: Product[]; initialNeed?: string | undefined }) {
   const [need, setNeed] = useState<string | undefined>(initialNeed);
   const [sort, setSort] = useState("featured");
   const list = useMemo(() => {
