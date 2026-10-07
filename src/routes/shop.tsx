@@ -3,7 +3,7 @@ import { ProductGrid } from "@/components/site/ProductGrid";
 import { products } from "@/lib/products";
 
 export const Route = createFileRoute("/shop")({
-  validateSearch: (s: Record<string, unknown>) => ({ need: typeof s.need === "string" ? s.need : undefined }),
+  validateSearch: (s: Record<string, unknown>): { need?: string } => (typeof s["need"] === "string" ? { need: s["need"] } : {}),
   head: () => ({
     meta: [
       { title: "Shop All — 63rd Street Apothecary" },

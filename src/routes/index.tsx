@@ -73,7 +73,7 @@ function Home() {
       <section className="mx-auto max-w-7xl px-5 pb-20 lg:px-8">
         <SectionHead eyebrow="Most loved" title="Best Sellers" link={{ to: "/shop", label: "Shop all" }} />
         <div className="grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-4">
-          {[...best, products[6]].map((p) => <ProductCard key={p.slug} product={p} />)}
+          {[...best, products[6]!].map((p) => <ProductCard key={p.slug} product={p} />)}
         </div>
       </section>
 
@@ -92,7 +92,7 @@ function Home() {
       <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
         <SectionHead eyebrow="Just poured" title="New Arrivals" link={{ to: "/shop", label: "View all" }} />
         <div className="grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-4">
-          {[...fresh, products[4]].map((p) => <ProductCard key={p.slug} product={p} />)}
+          {[...fresh, products[4]!].map((p) => <ProductCard key={p.slug} product={p} />)}
         </div>
       </section>
 
