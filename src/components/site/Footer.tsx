@@ -24,7 +24,7 @@ const cols = [
   { title: "Shop", links: [["All Products", "/shop"], ["Bath & Body", "/category/bath-body"], ["Skincare", "/category/skincare"], ["Candles", "/category/candles"], ["Gifts", "/category/gifts"]] },
   { title: "About", links: [["Our Story", "/about"], ["Journal", "/journal"], ["Contact", "/contact"]] },
   { title: "Help", links: [["FAQ", "/faq"], ["Shipping", "/shipping"], ["Returns", "/returns"], ["Privacy", "/privacy"], ["Terms", "/terms"]] },
-];
+] as const;
 
 export function Footer() {
   return (

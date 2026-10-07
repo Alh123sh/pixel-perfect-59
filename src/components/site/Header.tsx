@@ -12,7 +12,7 @@ const nav = [
   { label: "Gifts", to: "/category/gifts" },
   { label: "About", to: "/about" },
   { label: "Journal", to: "/journal" },
-];
+] as const;
 
 export function Logo() {
   return (
