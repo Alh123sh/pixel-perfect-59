@@ -1,22 +1,29 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
+import { JsonLd, breadcrumbJsonLd } from "@/components/site/JsonLd";
 import { ProductGrid } from "@/components/site/ProductGrid";
-import { byCategory, getCategory } from "@/lib/products";
+import { getCategories, useCatalog } from "@/lib/storefront";
 
 export const Route = createFileRoute("/category/$slug")({
-  loader: ({ params }) => {
-    const category = getCategory(params.slug);
+  loader: async ({ params }) => {
+    const category = (await getCategories()).find((item) => item.slug === params.slug);
     if (!category) throw notFound();
     return { category };
   },
   head: ({ loaderData }) => {
-    const t = `${loaderData?.category.name ?? "Category"} — 63rd Street Apothecary`;
-    const d = loaderData?.category.blurb ?? "";
-    return { meta: [{ title: t }, { name: "description", content: d }, { property: "og:title", content: t }, { property: "og:description", content: d }] };
+    const title = `${loaderData?.category.name ?? "Category"} — 63rd Street Apothecary`;
+    const description = loaderData?.category.blurb ?? "";
+    return { meta: [{ title }, { name: "description", content: description }, { property: "og:title", content: title }, { property: "og:description", content: description }] };
   },
   component: CategoryPage,
 });
 
 function CategoryPage() {
   const { category } = Route.useLoaderData();
-  return <ProductGrid key={category.slug} title={category.name} intro={category.blurb} items={byCategory(category.slug)} />;
+  const { products } = useCatalog();
+  return (
+    <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Shop", path: "/shop" }, { name: category.name, path: `/category/${category.slug}` }])} />
+      <ProductGrid key={category.slug} title={category.name} intro={category.blurb} items={products.filter((product) => product.category === category.slug)} hideCategory crumbs={[{ label: "Shop", to: "/shop" }, { label: category.name }]} />
+    </>
+  );
 }

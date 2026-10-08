@@ -1,24 +1,18 @@
-# Pixel Perfect (59)
+# Velvetique Beauty
 
-Implement exactly the screenshot and nothing else
+Storefront and admin for a small-batch beauty shop, built with TanStack Start, React, and Tailwind.
 
-This project was built with [Lovable](https://lovable.dev).
+See [cursor-migration.md](./cursor-migration.md) for the codebase map and how to run it.
 
-## Build with Lovable
+## Local development
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/474de725-fbc7-452b-83f7-b00a5f3ff44e).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+You need Node.js 22+ and npm.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+npm install
 npm run dev
 ```
+
+The dev server listens on [http://localhost:8080](http://localhost:8080).
+
+The shop renders from the local catalog in `src/lib/products.ts` until `DATABASE_URL` is set. See [cursor-migration.md](./cursor-migration.md) for Postgres setup.

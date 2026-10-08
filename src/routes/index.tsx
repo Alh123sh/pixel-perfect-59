@@ -1,127 +1,184 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Leaf, Package, Sparkles, Star } from "lucide-react";
-import { categories, heroImage, needs, posts, products } from "@/lib/products";
+import { ChevronLeft, ChevronRight, FlaskConical, Headset, Leaf, Rabbit, Recycle, RotateCcw, ShieldCheck, Truck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useCatalog } from "@/lib/storefront";
 import { ProductCard } from "@/components/site/ProductCard";
-import gift from "@/assets/gift.jpg";
+import body from "@/assets/vt/body.jpg";
+import cream from "@/assets/vt/cream.jpg";
+import gift from "@/assets/vt/gift.jpg";
+import hair from "@/assets/vt/lotion.jpg";
+import heroMakeup from "@/assets/vt/hero-2.jpg";
+import makeup from "@/assets/vt/makeup.jpg";
+import promo from "@/assets/vt/gift.jpg";
+import skin from "@/assets/vt/skin.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "63rd Street Apothecary — Small-Batch Rituals for Everyday Wellbeing" },
-      { name: "description", content: "Handcrafted bath, body, skincare, soaps and candles, made in small batches with care." },
-      { property: "og:title", content: "63rd Street Apothecary" },
-      { property: "og:description", content: "Handcrafted bath, body, skincare, soaps and candles." },
+      { title: "63rd Street Apothecary — Radiant Skin. Real Confidence." },
+      { name: "description", content: "Clean beauty that nourishes, enhances and empowers you. Shop skincare, makeup, haircare, bodycare, and gift sets." },
+      { property: "og:title", content: "63rd Street Apothecary — Radiant Skin. Real Confidence." },
+      { property: "og:description", content: "Clean beauty that nourishes, enhances and empowers you." },
+      { property: "og:type", content: "website" },
     ],
   }),
   component: Home,
 });
 
-function SectionHead({ eyebrow, title, link }: { eyebrow: string; title: string; link?: { to: "/shop"; label: string } }) {
-  return (
-    <div className="mb-10 flex items-end justify-between gap-6">
-      <div><p className="eyebrow">{eyebrow}</p><h2 className="mt-2 text-4xl md:text-5xl">{title}</h2></div>
-      {link && <Link to={link.to} className="link-underline hidden text-xs uppercase tracking-[0.18em] sm:block">{link.label}</Link>}
-    </div>
-  );
-}
+const slides = [
+  {
+    eyebrow: "New in",
+    title: "Radiant Skin. Real Confidence.",
+    text: "Clean beauty that nourishes, enhances and empowers you.",
+    image: body,
+    alt: "A glass dropper bottle of facial oil in warm light",
+    cta: "Shop now",
+  },
+  {
+    eyebrow: "The edit",
+    title: "Color, softly done.",
+    text: "Makeup and care made to feel effortless from the first swipe.",
+    image: heroMakeup,
+    alt: "Makeup brushes, lipstick, and a compact arranged on a warm background",
+    cta: "Shop now",
+  },
+] as const;
+
+const circles = [
+  { name: "Skincare", image: skin, slug: "skincare" },
+  { name: "Makeup", image: makeup, slug: "" },
+  { name: "Haircare", image: hair, slug: "" },
+  { name: "Bodycare", image: body, slug: "bath-body" },
+  { name: "Sun Care", image: cream, slug: "" },
+  { name: "Gift Sets", image: gift, slug: "gifts" },
+] as const;
+
+const promises = [
+  { Icon: Leaf, title: "Clean Ingredients", text: "Skin & Scalp-Safe" },
+  { Icon: FlaskConical, title: "Clinically Proven", text: "Dermatologically tested" },
+  { Icon: Rabbit, title: "Cruelty Free", text: "We never test on animals" },
+  { Icon: Recycle, title: "Sustainable Beauty", text: "Good for you & the planet" },
+] as const;
+
+const services = [
+  { Icon: Truck, title: "Free Shipping", text: "On orders over ₹999" },
+  { Icon: RotateCcw, title: "Easy Returns", text: "15 days return policy" },
+  { Icon: ShieldCheck, title: "Secure Payment", text: "100% secure checkout" },
+  { Icon: Headset, title: "24/7 Support", text: "We're here to help" },
+] as const;
 
 function Home() {
-  const best = products.filter((p) => p.badge === "Best Seller");
-  const fresh = products.filter((p) => p.badge === "New");
+  const { products } = useCatalog();
+  const best = products.filter((product) => product.badge === "Best Seller").slice(0, 4);
+  const [index, setIndex] = useState(0);
+  const slide = slides[index] ?? slides[0]!;
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches) return;
+    const id = window.setInterval(() => setIndex((i) => (i + 1) % slides.length), 7000);
+    return () => window.clearInterval(id);
+  }, []);
+
   return (
     <>
-      <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-20">
-        <div className="fade-up order-2 lg:order-1">
-          <p className="eyebrow">Handcrafted Self-Care</p>
-          <h1 className="mt-5 text-5xl leading-[1.02] md:text-7xl">Small-Batch Rituals for <em>Everyday</em> Wellbeing</h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
-            Discover thoughtfully crafted bath, body, skincare, and home products made to bring a little more comfort and care into your everyday routine.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Link to="/shop" className="btn btn-primary">Shop Best Sellers</Link>
-            <Link to="/category/$slug" params={{ slug: "gifts" }} className="btn btn-outline">Explore the Collection</Link>
+      <section className="relative bg-[#f6ece9]" aria-roledescription="carousel" aria-label="Featured">
+        <div className="mx-auto grid max-w-7xl items-center gap-6 px-5 py-12 md:px-10 lg:grid-cols-2 lg:py-16">
+          <div key={slide.eyebrow}>
+            <p className="text-xs font-medium uppercase tracking-[0.32em] text-foreground">{slide.eyebrow}</p>
+            <h1 className="mt-4 max-w-xl text-5xl leading-[1.05] text-foreground md:text-6xl lg:text-[4.25rem]">
+              {slide.title.includes(".") ? (
+                <>
+                  {slide.title.split(". ")[0]}.
+                  <br />
+                  {slide.title.split(". ").slice(1).join(". ")}
+                </>
+              ) : slide.title}
+            </h1>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground md:text-base">{slide.text}</p>
+            <Link to="/shop" className="btn btn-primary mt-8">{slide.cta}</Link>
           </div>
+          <img src={slide.image} alt={slide.alt} className="mx-auto aspect-[5/4] w-full max-w-xl rounded-2xl object-cover shadow-sm" />
         </div>
-        <div className="fade-up order-1 lg:order-2">
-          <img src={heroImage} alt="Candle, body oils and handmade soaps on linen" width={1280} height={1536} className="aspect-[4/5] w-full object-cover" />
-        </div>
+        <button type="button" aria-label="Previous slide" onClick={() => setIndex((i) => (i - 1 + slides.length) % slides.length)}
+          className="absolute left-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-foreground shadow-sm md:left-6">
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button type="button" aria-label="Next slide" onClick={() => setIndex((i) => (i + 1) % slides.length)}
+          className="absolute right-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-foreground shadow-sm md:right-6">
+          <ChevronRight className="h-5 w-5" />
+        </button>
       </section>
 
-      <section className="border-y bg-cream">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-5 py-8 text-center text-xs uppercase tracking-[0.16em] md:grid-cols-4 lg:px-8">
-          {[[Leaf, "Natural ingredients"], [Sparkles, "Made in small batches"], [Package, "Free shipping over $75"], [Star, "4.9 average rating"]].map(([I, t]) => {
-            const Icon = I as typeof Leaf;
-            return <div key={t as string} className="flex items-center justify-center gap-2"><Icon className="h-4 w-4 text-primary" strokeWidth={1.5} />{t as string}</div>;
+      <div className="relative z-10 mx-auto -mt-8 max-w-6xl px-5">
+        <div className="grid grid-cols-2 gap-6 rounded-2xl border bg-white px-6 py-6 shadow-[0_10px_40px_rgba(78,36,60,0.06)] md:grid-cols-4 md:divide-x md:divide-border md:px-2">
+          {promises.map(({ Icon, title, text }) => (
+            <div key={title} className="flex items-center gap-3 md:justify-center md:px-4">
+              <Icon className="h-7 w-7 shrink-0 text-primary" strokeWidth={1.4} />
+              <div>
+                <p className="text-sm font-medium text-foreground">{title}</p>
+                <p className="text-xs text-muted-foreground">{text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <section className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+        <h2 className="text-center text-sm font-medium uppercase tracking-[0.28em] text-foreground">Shop by Category</h2>
+        <div className="mt-10 grid grid-cols-3 gap-6 sm:grid-cols-6">
+          {circles.map((c) => {
+            const inner = (
+              <>
+                <span className="mx-auto block aspect-square overflow-hidden rounded-full bg-secondary ring-4 ring-white">
+                  <img src={c.image} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                </span>
+                <span className="mt-3 block text-[0.68rem] font-medium uppercase tracking-[0.16em]">{c.name}</span>
+              </>
+            );
+            return c.slug
+              ? <Link key={c.name} to="/category/$slug" params={{ slug: c.slug }} className="group text-center">{inner}</Link>
+              : <Link key={c.name} to="/shop" className="group text-center">{inner}</Link>;
           })}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
-        <SectionHead eyebrow="Explore" title="Shop by Category" />
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
-          {categories.map((c) => (
-            <Link key={c.slug} to="/category/$slug" params={{ slug: c.slug }} className="group">
-              <div className="aspect-[3/4] overflow-hidden bg-secondary">
-                <img src={c.image} alt={c.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              </div>
-              <p className="mt-3 font-serif text-xl">{c.name}</p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-5 pb-20 lg:px-8">
-        <SectionHead eyebrow="Most loved" title="Best Sellers" link={{ to: "/shop", label: "Shop all" }} />
-        <div className="grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-4">
-          {[...best, products[6]!].map((p) => <ProductCard key={p.slug} product={p} />)}
-        </div>
-      </section>
-
-      <section className="bg-secondary">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 md:grid-cols-2 lg:px-8">
-          <img src={gift} alt="Self-care gift box" loading="lazy" className="aspect-square w-full object-cover" />
-          <div className="md:pl-10">
-            <p className="eyebrow">Featured Collection</p>
-            <h2 className="mt-3 text-5xl">The Gifting Edit</h2>
-            <p className="mt-5 max-w-md text-muted-foreground">Curated boxes of our favourite soaps, candles and balms — wrapped by hand in kraft and twine, ready to give.</p>
-            <Link to="/category/$slug" params={{ slug: "gifts" }} className="btn btn-primary mt-8">Shop Gifts</Link>
+      <section className="mx-auto max-w-7xl px-5 pb-4 lg:px-8">
+        <div className="grid overflow-hidden rounded-2xl bg-primary text-primary-foreground md:grid-cols-2">
+          <div className="px-8 py-12 md:px-14 md:py-16">
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-white/80">Limited time offer</p>
+            <h2 className="mt-4 text-4xl leading-tight text-white md:text-5xl">Up to 30% Off on Best Sellers</h2>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/90 md:text-base">
+              Glow more, spend less. Treat your skin today!
+            </p>
+            <Link to="/collections/$slug" params={{ slug: "best-sellers" }} className="btn mt-8 bg-white text-primary hover:bg-ink hover:text-white">Shop the sale</Link>
           </div>
+          <img src={promo} alt="A gift box wrapped in pink with a gold ribbon" className="h-full min-h-64 w-full object-cover" />
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
-        <SectionHead eyebrow="Just poured" title="New Arrivals" link={{ to: "/shop", label: "View all" }} />
-        <div className="grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-4">
-          {[...fresh, products[4]!].map((p) => <ProductCard key={p.slug} product={p} />)}
+      <section className="mx-auto max-w-7xl px-5 py-14 lg:px-8">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <h2 className="text-sm font-medium uppercase tracking-[0.28em]">Best Sellers</h2>
+          <Link to="/collections/$slug" params={{ slug: "best-sellers" }} className="text-xs font-medium uppercase tracking-[0.18em] text-primary">View all</Link>
+        </div>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+          {best.map((p) => <ProductCard key={p.slug} product={p} />)}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 pb-20 lg:px-8">
-        <SectionHead eyebrow="Find your ritual" title="Shop by Need" />
-        <div className="flex flex-wrap gap-3">
-          {needs.map((n) => (
-            <Link key={n.slug} to="/shop" search={{ need: n.slug }} className="border px-6 py-3 font-serif text-xl transition hover:bg-foreground hover:text-background">{n.name}</Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-primary text-primary-foreground">
-        <div className="mx-auto max-w-4xl px-5 py-20 text-center">
-          <p className="eyebrow text-primary-foreground/70">Kind words</p>
-          <blockquote className="mt-6 font-serif text-3xl leading-snug md:text-4xl">“The lavender oat soap is the only thing my sensitive skin tolerates. Every bar feels like a little gift.”</blockquote>
-          <p className="mt-6 text-xs uppercase tracking-[0.2em]">— Maya R., verified buyer</p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
-        <SectionHead eyebrow="The Journal" title="Notes on Slow Living" />
-        <div className="grid gap-8 md:grid-cols-3">
-          {posts.map((p) => (
-            <Link key={p.slug} to="/journal/$slug" params={{ slug: p.slug }} className="group">
-              <div className="aspect-[4/3] overflow-hidden"><img src={p.image} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" /></div>
-              <p className="eyebrow mt-4">{p.date}</p>
-              <p className="mt-2 font-serif text-2xl">{p.title}</p>
-            </Link>
+      <section className="border-t">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-5 py-12 md:grid-cols-4 lg:px-8">
+          {services.map(({ Icon, title, text }) => (
+            <div key={title} className="flex items-center gap-3">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-secondary text-primary">
+                <Icon className="h-5 w-5" strokeWidth={1.5} />
+              </span>
+              <div>
+                <p className="text-sm font-medium uppercase tracking-[0.08em]">{title}</p>
+                <p className="text-xs text-muted-foreground">{text}</p>
+              </div>
+            </div>
           ))}
         </div>
       </section>

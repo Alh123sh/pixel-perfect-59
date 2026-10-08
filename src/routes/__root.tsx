@@ -4,17 +4,20 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import type { ReactNode } from "react";
+import { motion } from "framer-motion";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+import { AuthProvider } from "@/lib/auth";
+import { loadStorefront } from "@/lib/storefront";
 import { StoreProvider } from "@/lib/store";
 import { Header } from "@/components/site/Header";
-import { Footer, Newsletter } from "@/components/site/Footer";
+import { Footer } from "@/components/site/Footer";
 import { CartDrawer } from "@/components/site/CartDrawer";
 
 function NotFoundComponent() {
@@ -42,9 +45,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -90,12 +90,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/logo.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,
+  loader: () => loadStorefront(),
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
@@ -117,18 +118,22 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <QueryClientProvider client={queryClient}>
-      <StoreProvider>
+      <AuthProvider>
+        <StoreProvider>
         <Header />
         <main className="min-h-[60vh]">
-          <Outlet />
+          <motion.div key={pathname} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, ease: [0.2, 0.7, 0.2, 1] }}>
+            <Outlet />
+          </motion.div>
         </main>
-        <Newsletter />
         <Footer />
         <CartDrawer />
-      </StoreProvider>
+        </StoreProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

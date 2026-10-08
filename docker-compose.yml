@@ -1,0 +1,21 @@
+name: apothecary
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: apothecary
+      POSTGRES_PASSWORD: apothecary
+      POSTGRES_DB: apothecary
+    ports:
+      - "5440:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U apothecary -d apothecary"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  pgdata:

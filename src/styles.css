@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Playfair Display", Georgia, serif;
   --font-sans: "Jost", system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
@@ -40,65 +40,81 @@
 }
 
 :root {
-  --radius: 2px;
-  --background: oklch(0.975 0.012 85);      /* warm ivory */
-  --foreground: oklch(0.27 0.012 60);       /* charcoal */
-  --card: oklch(0.985 0.008 85);
-  --card-foreground: oklch(0.27 0.012 60);
-  --popover: oklch(0.985 0.008 85);
-  --popover-foreground: oklch(0.27 0.012 60);
-  --primary: oklch(0.42 0.045 140);         /* natural green */
-  --primary-foreground: oklch(0.975 0.012 85);
-  --secondary: oklch(0.935 0.022 80);       /* soft beige */
-  --secondary-foreground: oklch(0.27 0.012 60);
-  --muted: oklch(0.945 0.018 82);
-  --muted-foreground: oklch(0.5 0.02 60);
-  --accent: oklch(0.9 0.03 125);
-  --accent-foreground: oklch(0.3 0.04 140);
-  --destructive: oklch(0.55 0.16 30);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.88 0.02 75);
-  --input: oklch(0.86 0.02 75);
-  --ring: oklch(0.42 0.045 140);
-  --sage: oklch(0.72 0.04 135);
-  --sage-foreground: oklch(0.22 0.02 140);
-  --ink: oklch(0.25 0.012 60);
-  --ink-foreground: oklch(0.95 0.015 85);
-  --cream: oklch(0.955 0.02 85);
-  --clay: oklch(0.55 0.06 55);              /* soft brown */
+  --radius: 8px;
+  --background: #fbf7f6;
+  --foreground: #2c2428;
+  --card: #ffffff;
+  --card-foreground: #2c2428;
+  --popover: #ffffff;
+  --popover-foreground: #2c2428;
+  --primary: #c48993;
+  --primary-foreground: #ffffff;
+  --rose-deep: #a86c78;
+  --secondary: #f6eeec;
+  --secondary-foreground: #2c2428;
+  --muted: #f3ebe9;
+  --muted-foreground: #7a6a6e;
+  --accent: #f6eeec;
+  --accent-foreground: #4e243c;
+  --destructive: #9c3d45;
+  --destructive-foreground: #ffffff;
+  --border: #eadfdd;
+  --input: #eadfdd;
+  --ring: #c48993;
+  --sage: #c48993;
+  --sage-foreground: #ffffff;
+  --ink: #4e243c;
+  --ink-foreground: #f8f1f4;
+  --cream: #f7efed;
+  --clay: #e0a425;
 }
 
 @layer base {
   * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
   }
-  h1, h2, h3, .font-serif { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.01em; }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  h1, h2, h3, .font-serif { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.02em; }
 }
 
 @utility eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--clay);
+  color: var(--primary);
 }
 
 @utility btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-  padding: .95rem 1.75rem; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
-  border-radius: var(--radius); transition: all .3s ease; border: 1px solid transparent;
+  padding: .85rem 1.5rem; font-size: .72rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase;
+  border-radius: 6px; transition: all .25s ease; border: 1px solid transparent;
 }
 @utility btn-primary {
   background: var(--primary); color: var(--primary-foreground);
-  &:hover { background: var(--ink); }
+  &:hover { background: var(--rose-deep); }
 }
 @utility btn-outline {
-  border-color: var(--foreground); color: var(--foreground);
-  &:hover { background: var(--foreground); color: var(--background); }
+  border-color: var(--primary); color: var(--primary); background: transparent;
+  &:hover { background: var(--primary); color: white; }
 }
 @utility link-underline {
   background-image: linear-gradient(currentColor, currentColor);

@@ -11,22 +11,47 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as AccountRouteImport } from './routes/account'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as JournalRouteImport } from './routes/journal'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ReturnsRouteImport } from './routes/returns'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as VerifyEmailRouteImport } from './routes/verify-email'
 import { Route as WishlistRouteImport } from './routes/wishlist'
+import { Route as AccountOrdersRouteImport } from './routes/account.orders'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAuditLogsRouteImport } from './routes/admin.audit-logs'
+import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
+import { Route as AdminCollectionsRouteImport } from './routes/admin.collections'
+import { Route as AdminCouponsRouteImport } from './routes/admin.coupons'
+import { Route as AdminCustomersRouteImport } from './routes/admin.customers'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminInventoryRouteImport } from './routes/admin.inventory'
+import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
+import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as AccountOrdersIdRouteImport } from './routes/account.orders.$id'
+import { Route as AdminOrdersIndexRouteImport } from './routes/admin.orders.index'
+import { Route as AdminOrdersIdRouteImport } from './routes/admin.orders.$id'
+import { Route as AdminProductsIndexRouteImport } from './routes/admin.products.index'
+import { Route as AdminProductsIdRouteImport } from './routes/admin.products.$id'
+import { Route as AdminProductsNewRouteImport } from './routes/admin.products.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -38,9 +63,19 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccessibilityRoute = AccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccountRoute = AccountRouteImport.update({
   id: '/account',
   path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -63,14 +98,34 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JournalRoute = JournalRouteImport.update({
   id: '/journal',
   path: '/journal',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReturnsRoute = ReturnsRouteImport.update({
@@ -98,14 +153,79 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerifyEmailRoute = VerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
   path: '/wishlist',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountOrdersRoute = AccountOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAuditLogsRoute = AdminAuditLogsRouteImport.update({
+  id: '/audit-logs',
+  path: '/audit-logs',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCategoriesRoute = AdminCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCollectionsRoute = AdminCollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCouponsRoute = AdminCouponsRouteImport.update({
+  id: '/coupons',
+  path: '/coupons',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCustomersRoute = AdminCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminInventoryRoute = AdminInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReviewsRoute = AdminReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
 const CategorySlugRoute = CategorySlugRouteImport.update({
   id: '/category/$slug',
   path: '/category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
+  id: '/collections/$slug',
+  path: '/collections/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JournalSlugRoute = JournalSlugRouteImport.update({
@@ -118,148 +238,334 @@ const ProductSlugRoute = ProductSlugRouteImport.update({
   path: '/product/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountOrdersIdRoute = AccountOrdersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AccountOrdersRoute,
+} as any)
+const AdminOrdersIndexRoute = AdminOrdersIndexRouteImport.update({
+  id: '/orders/',
+  path: '/orders/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersIdRoute = AdminOrdersIdRouteImport.update({
+  id: '/orders/$id',
+  path: '/orders/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProductsIndexRoute = AdminProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProductsIdRoute = AdminProductsIdRouteImport.update({
+  id: '/products/$id',
+  path: '/products/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProductsNewRoute = AdminProductsNewRouteImport.update({
+  id: '/products/new',
+  path: '/products/new',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/account': typeof AccountRoute
+  '/accessibility': typeof AccessibilityRoute
+  '/account': typeof AccountRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/journal': typeof JournalRouteWithChildren
+  '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/returns': typeof ReturnsRoute
   '/search': typeof SearchRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/terms': typeof TermsRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/wishlist': typeof WishlistRoute
+  '/account/orders': typeof AccountOrdersRouteWithChildren
+  '/admin/audit-logs': typeof AdminAuditLogsRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/collections': typeof AdminCollectionsRoute
+  '/admin/coupons': typeof AdminCouponsRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/inventory': typeof AdminInventoryRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/admin/': typeof AdminIndexRoute
+  '/account/orders/$id': typeof AccountOrdersIdRoute
+  '/admin/orders/$id': typeof AdminOrdersIdRoute
+  '/admin/products/$id': typeof AdminProductsIdRoute
+  '/admin/products/new': typeof AdminProductsNewRoute
+  '/admin/orders/': typeof AdminOrdersIndexRoute
+  '/admin/products/': typeof AdminProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/account': typeof AccountRoute
+  '/accessibility': typeof AccessibilityRoute
+  '/account': typeof AccountRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/journal': typeof JournalRouteWithChildren
+  '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/returns': typeof ReturnsRoute
   '/search': typeof SearchRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/terms': typeof TermsRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/wishlist': typeof WishlistRoute
+  '/account/orders': typeof AccountOrdersRouteWithChildren
+  '/admin/audit-logs': typeof AdminAuditLogsRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/collections': typeof AdminCollectionsRoute
+  '/admin/coupons': typeof AdminCouponsRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/inventory': typeof AdminInventoryRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/admin': typeof AdminIndexRoute
+  '/account/orders/$id': typeof AccountOrdersIdRoute
+  '/admin/orders/$id': typeof AdminOrdersIdRoute
+  '/admin/products/$id': typeof AdminProductsIdRoute
+  '/admin/products/new': typeof AdminProductsNewRoute
+  '/admin/orders': typeof AdminOrdersIndexRoute
+  '/admin/products': typeof AdminProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/account': typeof AccountRoute
+  '/accessibility': typeof AccessibilityRoute
+  '/account': typeof AccountRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/journal': typeof JournalRouteWithChildren
+  '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/returns': typeof ReturnsRoute
   '/search': typeof SearchRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/terms': typeof TermsRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/wishlist': typeof WishlistRoute
+  '/account/orders': typeof AccountOrdersRouteWithChildren
+  '/admin/audit-logs': typeof AdminAuditLogsRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/collections': typeof AdminCollectionsRoute
+  '/admin/coupons': typeof AdminCouponsRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/inventory': typeof AdminInventoryRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/admin/': typeof AdminIndexRoute
+  '/account/orders/$id': typeof AccountOrdersIdRoute
+  '/admin/orders/$id': typeof AdminOrdersIdRoute
+  '/admin/products/$id': typeof AdminProductsIdRoute
+  '/admin/products/new': typeof AdminProductsNewRoute
+  '/admin/orders/': typeof AdminOrdersIndexRoute
+  '/admin/products/': typeof AdminProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/accessibility'
     | '/account'
+    | '/admin'
     | '/cart'
     | '/checkout'
     | '/contact'
     | '/faq'
+    | '/forgot-password'
     | '/journal'
+    | '/login'
     | '/privacy'
+    | '/register'
+    | '/reset-password'
     | '/returns'
     | '/search'
     | '/shipping'
     | '/shop'
     | '/terms'
+    | '/verify-email'
     | '/wishlist'
+    | '/account/orders'
+    | '/admin/audit-logs'
+    | '/admin/categories'
+    | '/admin/collections'
+    | '/admin/coupons'
+    | '/admin/customers'
+    | '/admin/dashboard'
+    | '/admin/inventory'
+    | '/admin/reviews'
+    | '/admin/settings'
     | '/category/$slug'
+    | '/collections/$slug'
     | '/journal/$slug'
     | '/product/$slug'
+    | '/admin/'
+    | '/account/orders/$id'
+    | '/admin/orders/$id'
+    | '/admin/products/$id'
+    | '/admin/products/new'
+    | '/admin/orders/'
+    | '/admin/products/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/accessibility'
     | '/account'
     | '/cart'
     | '/checkout'
     | '/contact'
     | '/faq'
+    | '/forgot-password'
     | '/journal'
+    | '/login'
     | '/privacy'
+    | '/register'
+    | '/reset-password'
     | '/returns'
     | '/search'
     | '/shipping'
     | '/shop'
     | '/terms'
+    | '/verify-email'
     | '/wishlist'
+    | '/account/orders'
+    | '/admin/audit-logs'
+    | '/admin/categories'
+    | '/admin/collections'
+    | '/admin/coupons'
+    | '/admin/customers'
+    | '/admin/dashboard'
+    | '/admin/inventory'
+    | '/admin/reviews'
+    | '/admin/settings'
     | '/category/$slug'
+    | '/collections/$slug'
     | '/journal/$slug'
     | '/product/$slug'
+    | '/admin'
+    | '/account/orders/$id'
+    | '/admin/orders/$id'
+    | '/admin/products/$id'
+    | '/admin/products/new'
+    | '/admin/orders'
+    | '/admin/products'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/accessibility'
     | '/account'
+    | '/admin'
     | '/cart'
     | '/checkout'
     | '/contact'
     | '/faq'
+    | '/forgot-password'
     | '/journal'
+    | '/login'
     | '/privacy'
+    | '/register'
+    | '/reset-password'
     | '/returns'
     | '/search'
     | '/shipping'
     | '/shop'
     | '/terms'
+    | '/verify-email'
     | '/wishlist'
+    | '/account/orders'
+    | '/admin/audit-logs'
+    | '/admin/categories'
+    | '/admin/collections'
+    | '/admin/coupons'
+    | '/admin/customers'
+    | '/admin/dashboard'
+    | '/admin/inventory'
+    | '/admin/reviews'
+    | '/admin/settings'
     | '/category/$slug'
+    | '/collections/$slug'
     | '/journal/$slug'
     | '/product/$slug'
+    | '/admin/'
+    | '/account/orders/$id'
+    | '/admin/orders/$id'
+    | '/admin/products/$id'
+    | '/admin/products/new'
+    | '/admin/orders/'
+    | '/admin/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  AccountRoute: typeof AccountRoute
+  AccessibilityRoute: typeof AccessibilityRoute
+  AccountRoute: typeof AccountRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   JournalRoute: typeof JournalRouteWithChildren
+  LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
+  RegisterRoute: typeof RegisterRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ReturnsRoute: typeof ReturnsRoute
   SearchRoute: typeof SearchRoute
   ShippingRoute: typeof ShippingRoute
   ShopRoute: typeof ShopRoute
   TermsRoute: typeof TermsRoute
+  VerifyEmailRoute: typeof VerifyEmailRoute
   WishlistRoute: typeof WishlistRoute
   CategorySlugRoute: typeof CategorySlugRoute
+  CollectionsSlugRoute: typeof CollectionsSlugRoute
   ProductSlugRoute: typeof ProductSlugRoute
 }
 
@@ -279,11 +585,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/accessibility': {
+      id: '/accessibility'
+      path: '/accessibility'
+      fullPath: '/accessibility'
+      preLoaderRoute: typeof AccessibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/account': {
       id: '/account'
       path: '/account'
       fullPath: '/account'
       preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -314,6 +634,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/journal': {
       id: '/journal'
       path: '/journal'
@@ -321,11 +648,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JournalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/returns': {
@@ -363,6 +711,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/verify-email': {
+      id: '/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof VerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wishlist': {
       id: '/wishlist'
       path: '/wishlist'
@@ -370,11 +725,95 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WishlistRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account/orders': {
+      id: '/account/orders'
+      path: '/orders'
+      fullPath: '/account/orders'
+      preLoaderRoute: typeof AccountOrdersRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/audit-logs': {
+      id: '/admin/audit-logs'
+      path: '/audit-logs'
+      fullPath: '/admin/audit-logs'
+      preLoaderRoute: typeof AdminAuditLogsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/categories': {
+      id: '/admin/categories'
+      path: '/categories'
+      fullPath: '/admin/categories'
+      preLoaderRoute: typeof AdminCategoriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/collections': {
+      id: '/admin/collections'
+      path: '/collections'
+      fullPath: '/admin/collections'
+      preLoaderRoute: typeof AdminCollectionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/coupons': {
+      id: '/admin/coupons'
+      path: '/coupons'
+      fullPath: '/admin/coupons'
+      preLoaderRoute: typeof AdminCouponsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/customers': {
+      id: '/admin/customers'
+      path: '/customers'
+      fullPath: '/admin/customers'
+      preLoaderRoute: typeof AdminCustomersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/inventory': {
+      id: '/admin/inventory'
+      path: '/inventory'
+      fullPath: '/admin/inventory'
+      preLoaderRoute: typeof AdminInventoryRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reviews': {
+      id: '/admin/reviews'
+      path: '/reviews'
+      fullPath: '/admin/reviews'
+      preLoaderRoute: typeof AdminReviewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/category/$slug': {
       id: '/category/$slug'
       path: '/category/$slug'
       fullPath: '/category/$slug'
       preLoaderRoute: typeof CategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/$slug': {
+      id: '/collections/$slug'
+      path: '/collections/$slug'
+      fullPath: '/collections/$slug'
+      preLoaderRoute: typeof CollectionsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/journal/$slug': {
@@ -391,8 +830,111 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account/orders/$id': {
+      id: '/account/orders/$id'
+      path: '/$id'
+      fullPath: '/account/orders/$id'
+      preLoaderRoute: typeof AccountOrdersIdRouteImport
+      parentRoute: typeof AccountOrdersRoute
+    }
+    '/admin/orders/': {
+      id: '/admin/orders/'
+      path: '/orders'
+      fullPath: '/admin/orders/'
+      preLoaderRoute: typeof AdminOrdersIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders/$id': {
+      id: '/admin/orders/$id'
+      path: '/orders/$id'
+      fullPath: '/admin/orders/$id'
+      preLoaderRoute: typeof AdminOrdersIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/products/': {
+      id: '/admin/products/'
+      path: '/products'
+      fullPath: '/admin/products/'
+      preLoaderRoute: typeof AdminProductsIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/products/$id': {
+      id: '/admin/products/$id'
+      path: '/products/$id'
+      fullPath: '/admin/products/$id'
+      preLoaderRoute: typeof AdminProductsIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/products/new': {
+      id: '/admin/products/new'
+      path: '/products/new'
+      fullPath: '/admin/products/new'
+      preLoaderRoute: typeof AdminProductsNewRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
+
+interface AccountOrdersRouteChildren {
+  AccountOrdersIdRoute: typeof AccountOrdersIdRoute
+}
+
+const AccountOrdersRouteChildren: AccountOrdersRouteChildren = {
+  AccountOrdersIdRoute: AccountOrdersIdRoute,
+}
+
+const AccountOrdersRouteWithChildren = AccountOrdersRoute._addFileChildren(
+  AccountOrdersRouteChildren,
+)
+
+interface AccountRouteChildren {
+  AccountOrdersRoute: typeof AccountOrdersRouteWithChildren
+}
+
+const AccountRouteChildren: AccountRouteChildren = {
+  AccountOrdersRoute: AccountOrdersRouteWithChildren,
+}
+
+const AccountRouteWithChildren =
+  AccountRoute._addFileChildren(AccountRouteChildren)
+
+interface AdminRouteChildren {
+  AdminAuditLogsRoute: typeof AdminAuditLogsRoute
+  AdminCategoriesRoute: typeof AdminCategoriesRoute
+  AdminCollectionsRoute: typeof AdminCollectionsRoute
+  AdminCouponsRoute: typeof AdminCouponsRoute
+  AdminCustomersRoute: typeof AdminCustomersRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminInventoryRoute: typeof AdminInventoryRoute
+  AdminReviewsRoute: typeof AdminReviewsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminOrdersIdRoute: typeof AdminOrdersIdRoute
+  AdminProductsIdRoute: typeof AdminProductsIdRoute
+  AdminProductsNewRoute: typeof AdminProductsNewRoute
+  AdminOrdersIndexRoute: typeof AdminOrdersIndexRoute
+  AdminProductsIndexRoute: typeof AdminProductsIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAuditLogsRoute: AdminAuditLogsRoute,
+  AdminCategoriesRoute: AdminCategoriesRoute,
+  AdminCollectionsRoute: AdminCollectionsRoute,
+  AdminCouponsRoute: AdminCouponsRoute,
+  AdminCustomersRoute: AdminCustomersRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminInventoryRoute: AdminInventoryRoute,
+  AdminReviewsRoute: AdminReviewsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  AdminOrdersIdRoute: AdminOrdersIdRoute,
+  AdminProductsIdRoute: AdminProductsIdRoute,
+  AdminProductsNewRoute: AdminProductsNewRoute,
+  AdminOrdersIndexRoute: AdminOrdersIndexRoute,
+  AdminProductsIndexRoute: AdminProductsIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface JournalRouteChildren {
   JournalSlugRoute: typeof JournalSlugRoute
@@ -408,20 +950,28 @@ const JournalRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  AccountRoute: AccountRoute,
+  AccessibilityRoute: AccessibilityRoute,
+  AccountRoute: AccountRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   JournalRoute: JournalRouteWithChildren,
+  LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,
+  RegisterRoute: RegisterRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ReturnsRoute: ReturnsRoute,
   SearchRoute: SearchRoute,
   ShippingRoute: ShippingRoute,
   ShopRoute: ShopRoute,
   TermsRoute: TermsRoute,
+  VerifyEmailRoute: VerifyEmailRoute,
   WishlistRoute: WishlistRoute,
   CategorySlugRoute: CategorySlugRoute,
+  CollectionsSlugRoute: CollectionsSlugRoute,
   ProductSlugRoute: ProductSlugRoute,
 }
 export const routeTree = rootRouteImport
